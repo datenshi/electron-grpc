@@ -5,10 +5,43 @@
   <title>Electron Chat with gRPC</title>
 </head>
 <body>
-  <h1>Welcome to the electron gRPC chat application!</h1>
-  <label for="username">Username:</label>
-  <input id="username" name="username" type="text" placeholder="Your username">
+  <h1>Simple Chat with gRPC,  Node Server, client and Electron Client</h1>
+  <label for="username">ElectronUser:</label>
+  <input id="message" name="message" type="text" placeholder="Your message">
 
-  <button onclick="console.log('this is clicked!');">Start chatting!</button>
+  <button onclick="sendMessage();">Send</button>
+
+  <br><br>
+
+  <div id="reply"></div>
+
 </body>
+<script>
+  const ipc = require('electron').ipcRenderer;
+
+  let replyDiv = document.querySelector('#reply');
+
+  // ipc.on('hello', (event, args) => {
+  //   console.log('Hello from main process: ', args);
+  //   replyDiv.innerHTML = args;
+  // });
+
+  ipc.on('asynchronous-message', function (evt, message) {
+      console.log(message); // Returns: {'SAVED': 'File Saved'}
+  });
+
+  ipc.on('ping', (event, args) => {
+    console.log('PING from main process: ', args);
+    replyDiv.innerHTML += args;
+    replyDiv.innerHTML = replyDiv.innerHTML.replace(/\n\r?/g, '<br />');
+  });
+
+  const sendMessage = () => {
+    const message = document.getElementById('message');
+    if (message){
+      console.log('Message to be sent: ' + message.value);
+      ipc.send('send-message', message.value);
+    }
+  }
+</script>
 </html>
