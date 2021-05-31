@@ -55,9 +55,9 @@ function createWindow() {
         // Send content to window
         win.webContents.on('did-finish-load', ()=>{
             console.log('sent to renderer...');
-            win.webContents.send('ping', '[' + response.getUser() + ']: ' + response.getText() + String.fromCharCode(13));
+            win.webContents.send('receive-msg', '[' + response.getUser() + ']: ' + response.getText() + String.fromCharCode(13));
         });
-        win.webContents.send('ping', '[' + response.getUser() + ']: ' + response.getText() + String.fromCharCode(13));
+        win.webContents.send('receive-msg', '[' + response.getUser() + ']: ' + response.getText() + String.fromCharCode(13));
     });
 
     call.on('error', error => {
