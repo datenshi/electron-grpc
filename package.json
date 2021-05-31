@@ -3,7 +3,7 @@
   "repository": "https://github.com/melledijkstra/electron-grpc",
   "version": "1.0.0",
   "description": "A simple electron chat client with gRPC",
-  "main": "main4NodeServer.js",
+  "main": "main4Node.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
