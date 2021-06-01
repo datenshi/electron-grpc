@@ -1,0 +1,3 @@
+Commmand to build the JavaScript files using the .proto file, remember to adjust paths and filenames of required:
+
+protoc -I=. ./proto/chat2.proto --js_out=import_style=commonjs,binary:./server --grpc_out=./server --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin`
