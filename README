@@ -8,6 +8,7 @@ $ npm i grpc
 $ npm i grpc-tools
 ```
 3. Dynamic implementation of gRPC and protocol buffers: https://grpc.io/docs/languages/node/basics/
+
 NOTE: current project uses static implementation so some refactor must be done in the code to achive it.
 
 ## Build JavaScript libraries
@@ -43,3 +44,6 @@ npm install electron-rebuild
 ```
 npm start 
 ```
+
+## Reference project: 
+https://github.com/datenshi/electron-grpc
