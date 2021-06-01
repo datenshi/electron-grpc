@@ -14,17 +14,18 @@ $ ./gen-proto.sh
 Develop notes for ELECTRON client: (NOTE: run everything from the project root folder) 
 
 1. First we remove package-lock.json to prevent conflicts: 
-
+```
 rm package-lock.json 
-
+```
 2. Install modules: 
-
+```
 npm install electron-rebuild 
-
+```
 3. Rebuild: 
-
+```
 ./node_modules/.bin/electron-rebuild 
-
+```
 4. Start the client (the server must be running/listening first) 
-
+```
 npm start 
+```
