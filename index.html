@@ -34,6 +34,8 @@
     if (message){
       console.log('Message to be sent: ' + message.value);
       ipc.send('send-message', message.value);
+      // Clean the input textbox for next messages
+      message.value = '';
     }
   }
 </script>
