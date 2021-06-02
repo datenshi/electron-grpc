@@ -21,14 +21,14 @@
 
   let replyDiv = document.querySelector('#reply');
 
-  // Receive message from other clients
+  // Receive messages from other clients and render it into a div element
   ipc.on('receive-msg', (event, args) => {
     console.log('Receive msg from main process: ', args);
     replyDiv.innerHTML += args;
     replyDiv.innerHTML = replyDiv.innerHTML.replace(/\n\r?/g, '<br />');
   });
 
-  // Send message from Electron client
+  // Send messages from Electron client to the main process first (listening for 'send-message' events)
   const sendMessage = () => {
     const message = document.getElementById('message');
     if (message){

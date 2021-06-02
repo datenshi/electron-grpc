@@ -4,7 +4,7 @@ const ipc = require('electron').ipcMain;
 // Static Implementation of a gRPC API Under Node.js
 const service = require('./proto/proto/chat2_grpc_pb');
 const chat = require('./proto/proto/chat2_pb');
-const grpc = require('grpc');// Hardcode username for demo purposes
+const grpc = require('grpc');
 
 function createWindow() {
     // Create the browser window.
@@ -41,6 +41,10 @@ function createWindow() {
         console.log('received reply', response);
     });
 
+    /* 
+     *  Listen for events 'send-message' from renderer (user input message) 
+     *  and send it to gRPC server to be broadcasted to other users
+    */
     ipc.on('send-message', (event, args) => {
         console.log('Send-message from renderer process: ', args);
         let note = new chat.Message();
@@ -49,8 +53,12 @@ function createWindow() {
         client.send(note, function(err, response) {
             console.log('received reply', response);
         });
-    })
+    });
 
+    /* 
+     *  Listen for events 'data' from gRPC server (other users' messages) 
+     *  and print it into our renderer (send it to the renderer)
+    */
     call.on('data', response => {
         console.log(' Response from server - Message: [' + response.getUser() + ']: ' + response.getText());
         // Send content to window
